@@ -12,6 +12,7 @@ import LoginComp from './components/Login.component';
 //import { Router } from 'react-router';
 import{BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import AdminDashboardComponent from './pages/AdminDashboard.component';
+import ViewSalesComponent from './components/ViewSales.component';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +27,9 @@ root.render(
       </Route >
       <Route path='/admin-dashboard'>
           <AdminDashboardComponent />
+      </Route>
+      <Route path='/sales'>
+          <ViewSalesComponent />
       </Route>
       </Switch>
     </Router>

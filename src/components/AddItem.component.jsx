@@ -92,7 +92,7 @@ export default class AddItem extends React.Component {
             },
         })
         .then( response => {
-            this.setState({retrievedCategories: response.data})          
+            this.setState({retrievedCategories: ['',...response.data]})          
         })
         .catch(err => { 
             const code = err.response.status
