@@ -15,6 +15,7 @@ export default class AddItemDetails extends React.Component {
             comment: "",
             retrievedCategories: [],
             retrievedItems: [],
+            retrievedShipmentDates: [],
             barcodes: []
         }
         this.handleChange = this.handleChange.bind(this)
@@ -32,30 +33,34 @@ export default class AddItemDetails extends React.Component {
         console.log(this.state)
     }
 
-
+    
     saveItem = async () => {
-        let category = this.state.retrievedCategories.filter((cat, ind) => {
+        let categoryTemp = this.state.retrievedCategories.filter((cat, ind) => {
             if (cat.name === this.state.category) {
                 return cat
             }
         })
-        let item = this.state.retrievedItems.filter((item, ind) => {
+        let itemTemp = this.state.retrievedItems.slice(0).filter((item, ind) => {
             if (item.name === this.state.item) {
                 return item
             }
         })
         let payload = {
             id: 0,
-            category: category[0],
-            item: item[0],
+            category: categoryTemp,
+            item: itemTemp[0],
             quantity: this.state.quantity,
             serialNumber: this.state.serialNumber,
             comment: this.state.comment,
+            shipmentDate: this.state.shipmentDate
         }
+        console.log('payload')
+        console.log(payload)
+        console.log(this.state)
        
        // let completed = true
         if (payload.quantity >= 1) {
-            for (let i = 0; i < payload.quantity; i++) {
+            for (let i = 1; i <= payload.quantity; i++) {
                 await axios({
                     url: "http://localhost:8080/v1/api/itemInventory/createItemInventory",
                     method: "POST",
@@ -106,9 +111,19 @@ export default class AddItemDetails extends React.Component {
     populateItemOptions = () => {
         const items = this.state.retrievedItems
         return items.map((item, ind) => {
-            if (item.category.name === this.state.category) {
+            if (ind === 0) { 
+                return <option key={ind} >Select Item</option>
+            }
+            else if (item.category.name === this.state.category) {
                 return <option key={ind} value={item.name}>{item.name}</option>
             }
+        })
+    }
+
+    populateShipmentDateOptions = () => {
+        const shipmentDates = this.state.retrievedShipmentDates
+        return shipmentDates.map((shipmentDate, ind) => {
+            return <option key={ind} value={shipmentDate.date}>{shipmentDate.date}</option>
         })
     }
 
@@ -122,7 +137,7 @@ export default class AddItemDetails extends React.Component {
             },
         })
             .then(response => {
-                this.setState({ retrievedCategories: response.data })
+                this.setState({ retrievedCategories: ['',...response.data] })
             })
             .catch(err => {
                 const code = err.response.status
@@ -140,7 +155,7 @@ export default class AddItemDetails extends React.Component {
             },
         })
             .then(response => {
-                this.setState({ retrievedItems: response.data })
+                this.setState({ retrievedItems: ['',...response.data] })
             })
             .catch(err => {
                 const code = err.response.status
@@ -148,6 +163,23 @@ export default class AddItemDetails extends React.Component {
                     this.setState({ error: "Error occurred" })
                 }
             })
+        axios({
+                url: "http://localhost:8080/v1/api/shipmentDate/shipmentDates",
+                method: "GET",
+                headers: {
+                    authorization: "",
+                    'Access-Control-Allow-Origin': '*'
+                },
+            })
+                .then(response => {
+                    this.setState({ retrievedShipmentDates: ['',...response.data] })
+                })
+                .catch(err => {
+                    const code = err.response.status
+                    if (code === 409) {
+                        this.setState({ error: "Error occurred" })
+                    }
+                })
     }
 
     showBarcodes = () => {
@@ -176,9 +208,8 @@ export default class AddItemDetails extends React.Component {
         console.log('here')
         printable.print()
         
-
-
     }
+
     printBarcode = (div_id) => {
         window.print(div_id)
     }
@@ -242,6 +273,16 @@ export default class AddItemDetails extends React.Component {
                             </div>
                             <div className='col-7'>
                                 <input type="text" className='form-control' name='comment' onChange={this.handleChange} value={this.state.comment} />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-3'>
+                                <label htmlFor=""> Shipment Date:</label>
+                            </div>
+                            <div className='col-7'>
+                                <select name="shipmentDate" className='form-control' onChange={this.handleChange} value={this.state.shipmentDate} >
+                                    {this.populateShipmentDateOptions()}
+                                </select>
                             </div>
                         </div>
                     </div>

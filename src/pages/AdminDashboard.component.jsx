@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
+import { IdleTimerComponent } from 'react-idle-timer';
+import { Redirect } from 'react-router-dom';
 //import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import  { Component } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import 'react-tabs/style/react-tabs.css';
 import AddCategory from "../components/AddCategory.component";
@@ -11,41 +14,55 @@ import AddItemDetails from "../components/AddItemDetails.component";
 import PerformSale from "../components/PerformSale.component";
 import PerformSaleComponent from "../components/PerformSale.component";
 import {withRouter,Link} from 'react-router-dom'
+import PerformSaleNoScanner from "../components/PerformSaleNoScanner.component";
+import ViewSalesComponent from "../components/ViewSales.component";
+import Navbar from "../components/Navbar.component";
 
- class AdminHomeComponent extends PureComponent {
+class AdminHomeComponent extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-        value: '',
-        setValue: ''
+      isLoggedIn: true
+      // initialize state here
     };
   }
-  handleChange = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      ...this.state,
-      [name]: value,
-    });
-    console.log(this.state);
-  };
+
   
   render() {
+    
     return (
-        <div className="card">
-        <Tabs>
-          
-            
-              <Tab title='Add Item' eventKey='Add Item'><AddCategory /></Tab>
-              <Tab title='Add Item Details' eventKey='AddItemDetails'> <AddItemDetails /> </Tab>
-              <Tab title='Perform Sale' eventKey='Add Item'> <AddItem /> </Tab>
-           
-          
-                    
-               
+      <div>
+        <Navbar />
+        {/* idle timer */}
+       
+        
+        {/* navigation tabs */}
+        <Tabs defaultActiveKey="category" animation="false" className="mb-0">
+          <Tab eventKey="category" title="Catgeory">
+            <Tabs defaultActiveKey="addCategory" animation="false" className="mb-0">
+              <Tab eventKey="addCategory" title="Add Category"> <AddCategory /> </Tab>
+              <Tab eventKey="viewCategories" title="View Categories"> {/* add orders content here */}</Tab>
+            </Tabs>
+          </Tab>
+          <Tab eventKey="item" title="Item">
+            <Tabs defaultActiveKey="addItem" animation="false" className="mb-0">
+                <Tab eventKey="addItem" title="Register Item"> <AddItem /></Tab>
+                <Tab eventKey="viewItems" title="View Registered Items"> {/* add orders content here */}</Tab>
+                <Tab eventKey="addItemToInventory" title="Add Item to Inventory"> <AddItemDetails /> </Tab> 
+            </Tabs>
+          </Tab>
+          <Tab eventKey="Sale" title="Sale">
+            <Tabs defaultActiveKey="performSale" animation="false" className="mb-0">
+                <Tab eventKey="performSaleNS" title="Perform Sale NS"> <PerformSaleNoScanner /></Tab>
+                <Tab eventKey="viewSales" title="View  Sales"> <ViewSalesComponent /></Tab>
+            </Tabs>           
+          </Tab>
+          <Tab eventKey="customers" title="Customers">
+            <AddCustomer />           
+          </Tab>
         </Tabs>
-            
-        </div>
+      </div>
     );
   }
 }

@@ -9,6 +9,7 @@ import AddItemDetails from "../components/AddItemDetails.component";
 import PerformSale from "../components/PerformSale.component";
 import PerformSaleComponent from "../components/PerformSale.component";
 import {withRouter,Link} from 'react-router-dom'
+import PerformSaleNoScanner from "../components/PerformSaleNoScanner.component";
 
  class AdminHomeComponent extends PureComponent {
   constructor(props) {
@@ -41,6 +42,7 @@ import {withRouter,Link} from 'react-router-dom'
                     <Tab> Customers</Tab>
                     <Tab> Employees</Tab>
                     <Tab> Expenses</Tab>
+                    <Tab> Perform sale No Scanner</Tab>
                 </TabList>
                 <TabPanel><AddCategory /> </TabPanel>
                 <TabPanel><AddItem /> </TabPanel>
@@ -50,6 +52,7 @@ import {withRouter,Link} from 'react-router-dom'
                 <TabPanel> <AddCustomer /> </TabPanel>
                 <TabPanel> <AddEmployee/> </TabPanel>
                 <TabPanel>  </TabPanel>
+                <TabPanel> <PerformSaleNoScanner/> </TabPanel>
             </Tabs>
             
         </div>
