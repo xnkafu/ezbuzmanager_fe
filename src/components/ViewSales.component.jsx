@@ -20,7 +20,7 @@ class ViewSalesComponent extends React.Component {
     // For this example, we will just populate the state with 10 items
     
         axios({
-         url: "http://localhost:8080/v1/api/sales",
+         url: "http://10.0.0.175:8080/v1/api/sales",
          method: "GET",
          headers: {
              authorization: "",
