@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter,Link} from 'react-router-dom'
 
 class Navbar extends Component {
     constructor(props) {
@@ -6,7 +7,7 @@ class Navbar extends Component {
     }
 
     logout = () => {
-        const history = this.props
+        const  { history } = this.props
         //reset local storage
         history.push('/login')
         
@@ -28,11 +29,14 @@ class Navbar extends Component {
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <div className="navbar-nav">
-            <button className="nav-item nav-link btn btn-link">
-              Profile
+          <button className="nav-item nav-link btn btn-link">
+              <b>Home</b>
             </button>
             <button className="nav-item nav-link btn btn-link">
-              Logout
+              <b>Profile</b>
+            </button>
+            <button className="nav-item nav-link btn btn-link" onClick={this.logout}>
+              <b>Logout</b>
             </button>
           </div>
         </div>
@@ -41,4 +45,5 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+//export default Navbar;
+export default withRouter(Navbar);

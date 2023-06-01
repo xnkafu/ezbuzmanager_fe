@@ -141,14 +141,7 @@ export default class AddItem extends React.Component {
                             <input type="text" className='form-control' name='description' onChange={this.handleChange} value={this.state.description} />
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-3'>
-                            <label htmlFor=""> Make:</label>
-                        </div>
-                        <div className='col-7'>
-                            <input type="text" className='form-control' name='make' onChange={this.handleChange} value={this.state.make} />
-                        </div>
-                    </div>
+                    
                     <div className='row'>
                         <div className='col-3'>
                             <label htmlFor=""> Model:</label>

@@ -11,6 +11,7 @@ import { Form, Button } from 'react-bootstrap';
         this.state = {
           username: '',
           password: '',
+          errMessage: '',
         };
     }
     
@@ -45,17 +46,22 @@ import { Form, Button } from 'react-bootstrap';
           // Reset the form
             this.setState({ username: '', password: '' });
             const { history } = this.props
-            history.push('/dashboard')
+            history.push('/admin-dashboard')
         } else {
           // Handle login errors here
+          if (response.status === 400) {
+            this.setState({ errMessage: 'Invalid username or password'});
+          }
         }
       };
     
       render() {
         return (
           <div className="d-flex align-items-center justify-content-center h-100">
-            <div className="container bg-white p-4 rounded">
-              <h2 className="text-center mb-4">Login</h2>
+            <div className="container bg-white p-5 rounded">
+            <h1 className="text-center mb-5 text-primary"><b> THE COMPUTER VILLAGE STORE</b></h1>
+              <h2 className="text-center mb-2">Login</h2>
+              <p className="text-center mb-2 text-danger">{this.state.errMessage}</p>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formBasicUsername">
                   <Form.Label>Username</Form.Label>
@@ -91,5 +97,5 @@ import { Form, Button } from 'react-bootstrap';
       
     }
   
-    export default LoginComp;
-//export default withRouter(LoginComp);
+//    export default LoginComp;
+export default withRouter(LoginComp);

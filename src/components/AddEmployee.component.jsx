@@ -82,7 +82,7 @@ export default class AddEmployee extends React.Component {
                 this.setState({error:"Item name already exist. Enter a different name"})
             }
         })
-         this.backendCustomers()
+         this.backendEmployees()
      }
 
      clearForm() {

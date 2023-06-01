@@ -17,6 +17,7 @@ import ViewSalesComponent from './components/ViewSales.component';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   //<React.StrictMode>
+  <div>
     <Router>
       <Switch>
         <Route path='/login'>
@@ -33,7 +34,7 @@ root.render(
       </Route>
       </Switch>
     </Router>
-    
+    </div> 
  // </React.StrictMode>
 );
 

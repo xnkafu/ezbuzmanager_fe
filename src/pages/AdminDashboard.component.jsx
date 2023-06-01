@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { IdleTimerComponent } from 'react-idle-timer';
+import { useIdleTimer } from 'react-idle-timer';
 import { Redirect } from 'react-router-dom';
 //import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -23,19 +23,51 @@ class AdminHomeComponent extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: true,
       // initialize state here
+      timeout:1000 * 5 * 1,
+      showModal: false,
+      userLoggedIn: false,
+      isTimedOut: false
     };
+    this.idleTimer = null
+    this.onAction = this._onAction.bind(this)
+    this.onActive = this._onActive.bind(this)
+    this.onIdle = this._onIdle.bind(this)
+  }
+
+  
+  _onAction(e) {
+    console.log('user did something', e)
+    this.setState({isTimedOut: false})
+  }
+ 
+  _onActive(e) {
+    console.log('user is active', e)
+    this.setState({isTimedOut: false})
+  }
+ 
+  _onIdle(e) {
+    console.log('user is idle', e)
+    const isTimedOut = this.state.isTimedOut
+    if (isTimedOut) {
+        this.props.history.push('/')
+    } else {
+      this.setState({showModal: true})
+      this.idleTimer.reset();
+      this.setState({isTimedOut: true})
+    }
+    
   }
 
   
   render() {
-    
+     
     return (
       <div>
         <Navbar />
         {/* idle timer */}
-       
+   
         
         {/* navigation tabs */}
         <Tabs defaultActiveKey="category" animation="false" className="mb-0">
@@ -50,6 +82,7 @@ class AdminHomeComponent extends Component {
                 <Tab eventKey="addItem" title="Register Item"> <AddItem /></Tab>
                 <Tab eventKey="viewItems" title="View Registered Items"> {/* add orders content here */}</Tab>
                 <Tab eventKey="addItemToInventory" title="Add Item to Inventory"> <AddItemDetails /> </Tab> 
+                <Tab eventKey="addShipmentDate" title="Add Shipment Date">  </Tab> 
             </Tabs>
           </Tab>
           <Tab eventKey="Sale" title="Sale">
@@ -60,6 +93,9 @@ class AdminHomeComponent extends Component {
           </Tab>
           <Tab eventKey="customers" title="Customers">
             <AddCustomer />           
+          </Tab>
+          <Tab eventKey="employees" title="Employees">
+            <AddEmployee />           
           </Tab>
         </Tabs>
       </div>

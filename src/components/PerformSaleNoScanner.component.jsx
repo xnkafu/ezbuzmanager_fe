@@ -83,18 +83,23 @@ export default class PerformSaleNoScanner extends Component {
   showStock =  () => {
 
     var stock = this.state.stock
-    //console.log(stock)
+    // console.log('stock')
+    // console.log(stock)
 
     return stock.map((stck,ind) => {
-      return <tr key={ind}>
+      if (stck.currentStock !== 0) {
+        return <tr key={ind}>
         <td  >{ind + 1}</td>
         <td >{stck.item.category.name}</td>
         <td >{stck.shipmentDate}</td>
         <td value={stck.item.name}>{stck.item.name}</td>
+        <td>{stck.item.model}</td>
         <td value={stck.item.description}>{stck.item.description}</td>
         <td value={stck.currentStock}>{stck.currentStock}</td>
         <td> <button className='button form-control bg-success' onClick={()=>this.addToCart(stck)}>+</button> </td>
       </tr>
+      }
+      
     })
 
   }
@@ -341,7 +346,8 @@ export default class PerformSaleNoScanner extends Component {
                     <th>ID</th>
                     <th>Category</th>
                     <th>Shipment Date</th>
-                    <th>Item Name</th>
+                    <th>Name</th>
+                    <th>Model</th>
                     <th>Item Description</th>
                     <th>Stock</th>
                     <th>Add to Cart</th>

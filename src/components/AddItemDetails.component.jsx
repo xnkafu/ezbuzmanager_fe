@@ -114,8 +114,8 @@ export default class AddItemDetails extends React.Component {
             if (ind === 0) { 
                 return <option key={ind} >Select Item</option>
             }
-            else if (item.category.name === this.state.category) {
-                return <option key={ind} value={item.name}>{item.name}</option>
+            else if (item.category.name === this.state.category) { //revisit
+                return <option key={ind} value={item.name /*+ " " + item.model */}>{item.name + " " + item.model}</option>
             }
         })
     }
@@ -173,6 +173,7 @@ export default class AddItemDetails extends React.Component {
             })
                 .then(response => {
                     this.setState({ retrievedShipmentDates: ['',...response.data] })
+                    console.log(response.data)
                 })
                 .catch(err => {
                     const code = err.response.status

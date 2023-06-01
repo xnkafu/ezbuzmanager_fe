@@ -51,6 +51,57 @@ class ViewSalesComponent extends React.Component {
     this.setState({ currentPage: pageNumber });
   }
 
+  printreciept = (sale)=> {
+    
+    console.log('test')
+    console.log(sale)
+    var content = document.getElementById('printDiv').innerHTML;
+    var mywindow = window.open('', 'Print', 'height=600,width=800');
+
+    mywindow.document.write('<html><head><title>Print</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h2 style="text-align:center"> The Computer Village Store </h2>');
+    mywindow.document.write("<h4 style='text-align:center'> Nouvelle Route Cite College L'agape, Douala Cameroon </h4>");
+    mywindow.document.write('<h4 style="text-align:center"> Numbero: xxxx </h4>' );
+    mywindow.document.write('<hr>');
+
+    mywindow.document.write('<p> Confirmation: ' + sale.confirmationCode);
+    mywindow.document.write('<p> Customer Name: ' + sale.customer.lastname + " " + sale.customer.firstname + ',  Numero: ' + sale.customer.phone + '</p>');
+    mywindow.document.write('<p> Employee: ' + sale.employee.firstname + ' ' + sale.employee.lastname);
+    mywindow.document.write('<p> Sales date: ' + sale.salesDate);
+    var list = sale.itemsSold.split(',')
+    mywindow.document.write('<table>');
+    //mywindow.document.write('<thead> <th>Item </thead>');
+    for (let i = 0; i < list.length-1; i++)  {
+      var itemString = list[i]
+      var itemArr = itemString.split(':')
+      mywindow.document.write('<tr>');
+      mywindow.document.write('<td>' + itemArr[5] + ' ' + itemArr[0] + ' ' + itemArr[1] + ' ' + itemArr[6] +'<td>');
+      mywindow.document.write('<td>' + '@'+itemArr[4] +'<td>');
+      mywindow.document.write('<td>' + itemArr[4]*itemArr[5]  + 'frs' +'<td>');
+      mywindow.document.write('</tr>');
+
+    };
+    mywindow.document.write('<tr> </tr>');
+    mywindow.document.write('<tr>');
+    mywindow.document.write('<td>' + ' Total' + '<td>');
+    mywindow.document.write('<td>' + '<td>');
+    mywindow.document.write('<td>' + sale.total +'<td>');
+    mywindow.document.write('</tr>');
+    mywindow.document.write('</table>');
+    
+    mywindow.document.write('</body>');
+    mywindow.document.write('<footer>');
+    mywindow.document.write('</footer>');
+    mywindow.document.write('</html>');
+
+    mywindow.document.close();
+    mywindow.focus()
+    mywindow.print();
+    mywindow.close();
+
+  }
+
   render() {
     // Get the current page of sales
     const currentSales = this.getCurrentSales();
@@ -70,6 +121,7 @@ class ViewSalesComponent extends React.Component {
             <div className='card-header'>
                 <h2>View Sales</h2>
             </div>
+            <div id='printDiv'></div>
         
         <table className="table">
           <thead>
@@ -81,6 +133,7 @@ class ViewSalesComponent extends React.Component {
                         <th>Customer</th>
                         <th>Sold By</th>
                         <th>Sold Date</th>
+                        <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -93,6 +146,7 @@ class ViewSalesComponent extends React.Component {
                     <td>{sale.customer.firstname + " " + sale.customer.lastname}</td>
                     <td>{sale.employee.firstname}</td>
                     <td>{sale.salesDate}</td>
+                    <td><button className='form-control bg-success' onClick={()=>this.printreciept(sale)}>print</button></td>
 
               </tr>
             ))}
