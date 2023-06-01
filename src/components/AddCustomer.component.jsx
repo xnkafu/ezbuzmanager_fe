@@ -58,7 +58,7 @@ export default class AddCustomer extends React.Component {
         console.log("payload is ")
         console.log(payload)
         axios({
-            url: "http://localhost:8080/v1/api/customer/createCustomer",
+            url: "http://10.0.0.175/:8080/v1/api/customer/createCustomer",
             method: "POST",
             headers: {
                 authorization: "",
@@ -117,7 +117,7 @@ export default class AddCustomer extends React.Component {
     
     backendCustomers = () => {
         axios({
-            url: "http://localhost:8080/v1/api/customer/customers",
+            url: "http://10.0.0.175:8080/v1/api/customer/customers",
             method: "GET",
             headers: {
                 authorization: "",

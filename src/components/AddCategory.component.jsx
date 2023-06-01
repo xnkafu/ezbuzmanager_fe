@@ -27,7 +27,7 @@ export default class AddCategory extends React.Component {
 
      saveCategory() {
         axios({
-            url: "http://localhost:8080/v1/api/category/createCategory",
+            url: "http://10.0.0.175:8080/v1/api/category/createCategory",
             method: "POST",
             headers: {
                 authorization: "",

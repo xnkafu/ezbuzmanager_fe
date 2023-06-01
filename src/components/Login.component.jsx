@@ -27,7 +27,7 @@ import { Form, Button } from 'react-bootstrap';
         event.preventDefault();
       
         // Make a POST request to your login API endpoint with the username and password
-        const response = await fetch('http://localhost:8080/v1/api/login', {
+        const response = await fetch('http://10.0.0.175:8080/v1/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

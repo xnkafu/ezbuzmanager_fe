@@ -64,7 +64,7 @@ export default class AddEmployee extends React.Component {
         console.log("payload is ")
         console.log(payload)
        await axios({
-            url: "http://localhost:8080/v1/api/employee/createEmployee",
+            url: "http://10.0.0.175:8080/v1/api/employee/createEmployee",
             method: "POST",
             headers: {
                 authorization: "",
@@ -129,7 +129,7 @@ export default class AddEmployee extends React.Component {
     
     backendEmployees = () => {
         axios({
-            url: "http://localhost:8080/v1/api/employee/employees",
+            url: "http://10.0.0.175:8080/v1/api/employee/employees",
             method: "GET",
             headers: {
                 authorization: "",

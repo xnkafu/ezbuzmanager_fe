@@ -294,7 +294,7 @@ export default class PerformSaleNoScanner extends Component {
     }
     console.log(payload)
      axios({
-      url: "http://localhost:8080/v1/api/itemInventory/performSaleNS",
+      url: "http://10.0.0.175:8080/v1/api/itemInventory/performSaleNS",
       method: "POST",
       responseType: "application/json",
       headers: {

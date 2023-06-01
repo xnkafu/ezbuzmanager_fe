@@ -52,7 +52,7 @@ export default class AddItem extends React.Component {
         console.log("payload is ")
         console.log(payload)
         axios({
-            url: "http://localhost:8080/v1/api/item/createItem",
+            url: "http://10.0.0.175:8080/v1/api/item/createItem",
             method: "POST",
             headers: {
                 authorization: "",
@@ -84,7 +84,7 @@ export default class AddItem extends React.Component {
     }
     componentDidMount() {
         axios({
-            url: "http://localhost:8080/v1/api/category/categories",
+            url: "http://10.0.0.175:8080/v1/api/category/categories",
             method: "GET",
             headers: {
                 authorization: "",
