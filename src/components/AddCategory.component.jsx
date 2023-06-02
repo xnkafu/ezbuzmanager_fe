@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
+import {url} from '../config/url.js';
 
 export default class AddCategory extends React.Component {
      constructor(props) {
@@ -27,7 +28,7 @@ export default class AddCategory extends React.Component {
 
      saveCategory() {
         axios({
-            url: "http://10.0.0.175:8080/v1/api/category/createCategory",
+            url: url+"/v1/api/category/createCategory",
             method: "POST",
             headers: {
                 authorization: "",

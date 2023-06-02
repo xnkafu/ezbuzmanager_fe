@@ -3,6 +3,7 @@ import BarcodeReader from "react-barcode-reader";
 import { Stepper, Step } from "react-form-stepper";
 import axios from 'axios'
 import {Modal,Button} from 'react-bootstrap'
+import {url} from '../config/url.js';
 
 export default class PerformSaleNoScanner extends Component {
   constructor(props) {
@@ -294,7 +295,7 @@ export default class PerformSaleNoScanner extends Component {
     }
     console.log(payload)
      axios({
-      url: "http://10.0.0.175:8080/v1/api/itemInventory/performSaleNS",
+      url: url+"/v1/api/itemInventory/performSaleNS",
       method: "POST",
       responseType: "application/json",
       headers: {

@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
+import {url} from '../config/url.js';
 
 export default class AddItemDetails extends React.Component {
     constructor(props) {
@@ -62,7 +63,7 @@ export default class AddItemDetails extends React.Component {
         if (payload.quantity >= 1) {
             for (let i = 1; i <= payload.quantity; i++) {
                 await axios({
-                    url: "http://10.0.0.175:8080/v1/api/itemInventory/createItemInventory",
+                    url: url+"/v1/api/itemInventory/createItemInventory",
                     method: "POST",
                     responseType: "blob",
                     headers: {
@@ -129,7 +130,7 @@ export default class AddItemDetails extends React.Component {
 
     componentDidMount() {
         axios({
-            url: "http://10.0.0.175:8080/v1/api/category/categories",
+            url: url+"/v1/api/category/categories",
             method: "GET",
             headers: {
                 authorization: "",
@@ -147,7 +148,7 @@ export default class AddItemDetails extends React.Component {
             })
 
         axios({
-            url: "http://10.0.0.175:8080/v1/api/item/items",
+            url: url+"/v1/api/item/items",
             method: "GET",
             headers: {
                 authorization: "",
@@ -164,7 +165,7 @@ export default class AddItemDetails extends React.Component {
                 }
             })
         axios({
-                url: "http://10.0.0.175:8080/v1/api/shipmentDate/shipmentDates",
+                url: url+"/v1/api/shipmentDate/shipmentDates",
                 method: "GET",
                 headers: {
                     authorization: "",

@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
+import {url} from '../config/url.js';
 
 export default class AddItem extends React.Component {
      constructor(props) {
@@ -52,7 +53,7 @@ export default class AddItem extends React.Component {
         console.log("payload is ")
         console.log(payload)
         axios({
-            url: "http://10.0.0.175:8080/v1/api/item/createItem",
+            url: url+"/v1/api/item/createItem",
             method: "POST",
             headers: {
                 authorization: "",
@@ -84,7 +85,7 @@ export default class AddItem extends React.Component {
     }
     componentDidMount() {
         axios({
-            url: "http://10.0.0.175:8080/v1/api/category/categories",
+            url: url+"/v1/api/category/categories",
             method: "GET",
             headers: {
                 authorization: "",

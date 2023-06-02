@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
 import {withRouter,Link} from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap';
+import {url} from '../config/url.js';
 
 
   class LoginComp extends React.Component {
@@ -27,7 +28,7 @@ import { Form, Button } from 'react-bootstrap';
         event.preventDefault();
       
         // Make a POST request to your login API endpoint with the username and password
-        const response = await fetch('http://10.0.0.175:8080/v1/api/login', {
+        const response = await fetch(url+'/v1/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

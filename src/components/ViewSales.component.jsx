@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
 import { ListGroup } from 'react-bootstrap';
+import {url} from '../config/url.js';
 
 class ViewSalesComponent extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class ViewSalesComponent extends React.Component {
     // For this example, we will just populate the state with 10 items
     
         axios({
-         url: "http://10.0.0.175:8080/v1/api/sales",
+         url: url+"/v1/api/sales",
          method: "GET",
          headers: {
              authorization: "",

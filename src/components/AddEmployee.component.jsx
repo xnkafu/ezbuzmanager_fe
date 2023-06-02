@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
+import {url} from '../config/url.js';
 
 export default class AddEmployee extends React.Component {
      constructor(props) {
@@ -129,7 +130,7 @@ export default class AddEmployee extends React.Component {
     
     backendEmployees = () => {
         axios({
-            url: "http://10.0.0.175:8080/v1/api/employee/employees",
+            url: url+"/v1/api/employee/employees",
             method: "GET",
             headers: {
                 authorization: "",
