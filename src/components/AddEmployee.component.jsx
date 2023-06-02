@@ -65,7 +65,7 @@ export default class AddEmployee extends React.Component {
         console.log("payload is ")
         console.log(payload)
        await axios({
-            url: "http://10.0.0.175:8080/v1/api/employee/createEmployee",
+            url: url+"/v1/api/employee/createEmployee",
             method: "POST",
             headers: {
                 authorization: "",
@@ -192,7 +192,7 @@ export default class AddEmployee extends React.Component {
                             <input type="text" className='form-control' name='username' placeholder="username" onChange={this.handleChange} value={this.state.username} />
                         </div>
                         <div className='col-3'>
-                            <input type="text" className='form-control' name='password' placeholder="temporal password" onChange={this.handleChange} value={this.state.password} />
+                            <input type="password" className='form-control' name='password' placeholder="temporal password" onChange={this.handleChange} value={this.state.password} />
                          </div>
                          <div className='col-1'>
                             <input type="text" className='form-control' name='role' placeholder="Role" onChange={this.handleChange} value={this.state.role} />
