@@ -66,7 +66,7 @@ export default class PerformSaleNoScanner extends Component {
 
   getStock = async () => {
      await axios({
-      url: "http://localhost:8080/v1/api/itemInventory/stock",
+      url: url+"/v1/api/itemInventory/stock",
       method: "GET",
       headers: {
           authorization: "",
