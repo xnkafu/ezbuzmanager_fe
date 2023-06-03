@@ -134,7 +134,8 @@ export default class AddEmployee extends React.Component {
             method: "GET",
             headers: {
                 authorization: "",
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
             },
         })
         .then( response => {
