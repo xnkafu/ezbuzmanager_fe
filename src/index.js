@@ -21,9 +21,7 @@ root.render(
     <Router>
       <Switch>
 
-        <Route path=''>
-          <LoginComp />
-        </Route>
+        
         <Route path='/login'>
           <LoginComp />
         </Route>
