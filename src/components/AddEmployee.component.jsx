@@ -133,7 +133,6 @@ export default class AddEmployee extends React.Component {
             url: url+"/v1/api/employee/employees",
             method: "GET",
             headers: {
-                'authorization': "",
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
                 'ngrok-skip-browser-warning': ''

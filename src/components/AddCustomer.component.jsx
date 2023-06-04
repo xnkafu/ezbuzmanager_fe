@@ -62,7 +62,7 @@ export default class AddCustomer extends React.Component {
             url: url+"/v1/api/customer/createCustomer",
             method: "POST",
             headers: {
-                authorization: "",
+              //  authorization: "",
                 'Access-Control-Allow-Origin': '*'
             },
             data: payload,

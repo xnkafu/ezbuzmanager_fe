@@ -24,7 +24,7 @@ class ViewSalesComponent extends React.Component {
          url: url+"/v1/api/sales",
          method: "GET",
          headers: {
-             authorization: "",
+           //  authorization: "",
              'Access-Control-Allow-Origin': '*'
          },
          })

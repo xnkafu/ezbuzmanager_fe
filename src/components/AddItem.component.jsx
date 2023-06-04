@@ -88,7 +88,7 @@ export default class AddItem extends React.Component {
             url: url+"/v1/api/category/categories",
             method: "GET",
             headers: {
-                authorization: "",
+              //  authorization: "",
                 'Access-Control-Allow-Origin': '*'
             },
         })

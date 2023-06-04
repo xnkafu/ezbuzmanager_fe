@@ -67,7 +67,7 @@ export default class AddItemDetails extends React.Component {
                     method: "POST",
                     responseType: "blob",
                     headers: {
-                        authorization: "",
+                       // authorization: "",
                         'Access-Control-Allow-Origin': '*'
                     },
                     data: payload,

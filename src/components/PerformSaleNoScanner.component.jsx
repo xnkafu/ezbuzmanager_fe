@@ -69,7 +69,7 @@ export default class PerformSaleNoScanner extends Component {
       url: url+"/v1/api/itemInventory/stock",
       method: "GET",
       headers: {
-          authorization: "",
+         // authorization: "",
           'Access-Control-Allow-Origin': '*'
       },
       })
@@ -209,7 +209,10 @@ export default class PerformSaleNoScanner extends Component {
     await axios({
       url: "http://localhost:8080/v1/api/customer/" + this.state.customerPhoneNumber,                            
       method: "GET",                   
-      headers: { authorization: "", 'Access-Control-Allow-Origin': '*' }
+      headers: { 
+        //authorization: "", 
+        'Access-Control-Allow-Origin': '*' 
+      }
     })
       .then(response => {
         console.log("here",response.data)
@@ -299,7 +302,7 @@ export default class PerformSaleNoScanner extends Component {
       method: "POST",
       responseType: "application/json",
       headers: {
-          authorization: "",
+         // authorization: "",
           'Access-Control-Allow-Origin': '*'
       },
       data: payload,
