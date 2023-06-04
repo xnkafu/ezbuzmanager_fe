@@ -31,7 +31,8 @@ import {url} from '../config/url.js';
         const response = await fetch(url+'/v1/api/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
           },
           body: JSON.stringify({
             username: this.state.username,
