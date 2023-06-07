@@ -63,7 +63,8 @@ export default class AddCustomer extends React.Component {
             method: "POST",
             headers: {
               //  authorization: "",
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'ngrok-skip-browser-warning': ''
             },
             data: payload,
         })
@@ -122,7 +123,8 @@ export default class AddCustomer extends React.Component {
             method: "GET",
             headers: {
                 authorization: "",
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'ngrok-skip-browser-warning': ''
             },
         })
         .then( response => {

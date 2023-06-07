@@ -32,7 +32,8 @@ export default class AddCategory extends React.Component {
             method: "POST",
             headers: {
                 //authorization: "",
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'ngrok-skip-browser-warning': ''
             },
             data: {
                 name: this.state.name,

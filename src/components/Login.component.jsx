@@ -32,7 +32,8 @@ import {url} from '../config/url.js';
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Access-Control-Allow-Origin': '*',
+            'ngrok-skip-browser-warning': ''
           },
           body: JSON.stringify({
             username: this.state.username,

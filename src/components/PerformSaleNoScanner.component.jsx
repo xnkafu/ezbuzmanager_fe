@@ -70,7 +70,8 @@ export default class PerformSaleNoScanner extends Component {
       method: "GET",
       headers: {
          // authorization: "",
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'ngrok-skip-browser-warning': ''
       },
       })
        .then(response => {
@@ -211,7 +212,8 @@ export default class PerformSaleNoScanner extends Component {
       method: "GET",                   
       headers: { 
         //authorization: "", 
-        'Access-Control-Allow-Origin': '*' 
+        'Access-Control-Allow-Origin': '*' ,
+        'ngrok-skip-browser-warning': ''
       }
     })
       .then(response => {
@@ -303,7 +305,8 @@ export default class PerformSaleNoScanner extends Component {
       responseType: "application/json",
       headers: {
          // authorization: "",
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          'ngrok-skip-browser-warning': ''
       },
       data: payload,
      })
