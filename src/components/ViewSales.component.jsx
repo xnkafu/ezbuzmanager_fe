@@ -26,7 +26,7 @@ class ViewSalesComponent extends React.Component {
          headers: {
            //  authorization: "",
              'Access-Control-Allow-Origin': '*',
-             'ngrok-skip-browser-warning': ''
+             'ngrok-skip-browser-warning': '*'
          },
          })
           .then(response => {
