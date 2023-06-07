@@ -135,7 +135,7 @@ export default class AddEmployee extends React.Component {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': ''
+                'ngrok-skip-browser-warning': '*'
             },
         })
         .then( response => {

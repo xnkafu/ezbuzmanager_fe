@@ -172,7 +172,8 @@ export default class AddItemDetails extends React.Component {
                 method: "GET",
                 headers: {
                     authorization: "",
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*',
+                    'ngrok-skip-browser-warning': '*'
                 },
             })
                 .then(response => {
