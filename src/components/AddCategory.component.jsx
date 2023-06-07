@@ -31,7 +31,7 @@ export default class AddCategory extends React.Component {
             url: url+"/v1/api/category/createCategory",
             method: "POST",
             headers: {
-                authorization: "",
+                //authorization: "",
                 'Access-Control-Allow-Origin': '*'
             },
             data: {
