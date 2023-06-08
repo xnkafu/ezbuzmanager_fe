@@ -26,7 +26,9 @@ export default class AddCategory extends React.Component {
          console.log(this.state)
      }
 
-     saveCategory() {
+     saveCategory = (event) =>{
+        event.preventDefault();
+        console.log('inside')
         axios({
             url: url+"/v1/api/category/createCategory",
             method: "POST",
@@ -42,6 +44,7 @@ export default class AddCategory extends React.Component {
         })
         .then( response => {
             alert("Category Saved")
+            this.setState({error:""})
             this.clearForm()
         })
         .catch(err => { 
@@ -57,7 +60,8 @@ export default class AddCategory extends React.Component {
     }
 
      render() {
-         return <div className='container'>
+         return <form onSubmit={this.saveCategory}>
+         <div className='container'>
              <div className='card'>
                  <div className='card-header bg-info'>
                     <h4>Add Category</h4>
@@ -82,7 +86,7 @@ export default class AddCategory extends React.Component {
                             <label htmlFor=""> Description:</label>
                         </div>
                         <div className='col-7'>
-                            <input type="text" className='form-control' name='description' onChange={this.handleChange} value={this.state.description} />
+                            <input type="text" className='form-control' name='description' onChange={this.handleChange} value={this.state.description} required/>
                         </div>
                     </div>
                  </div>
@@ -90,10 +94,11 @@ export default class AddCategory extends React.Component {
                     <div className='row'>
                         <div className='col-3'></div>
                         <div className='col-3'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
-                        <div className='col-3'> <button className='form-control bg-success' onClick={this.saveCategory} > Save</button></div>
+                        <div className='col-3'> <button type='submit' className='form-control bg-success' > Save</button></div>
                     </div>
                  </div>
              </div>
          </div>
+         </form>
      }
 }

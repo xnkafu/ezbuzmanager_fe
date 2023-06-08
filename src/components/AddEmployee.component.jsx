@@ -40,8 +40,8 @@ export default class AddEmployee extends React.Component {
          })
      }
 
-     saveEmployee = async () => {
-         
+     saveEmployee = async (event) => {
+        event.preventDefault();
          let payload = {
              id: 0,
              firstname: this.state.firstname,
@@ -150,14 +150,15 @@ export default class AddEmployee extends React.Component {
     }
 
      render() {
-         return <div className='container'>
+         return <form onSubmit={this.saveEmployee}>
+         <div className='container'>
              <div className='card'>
                  <div className='card-header bg-info'>
                      <div className='row'>
                      <div className='col-3'><h4>Add Employee</h4></div>
                      <div className='col-3'></div>
                      <div className='col-3'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
-                     <div className='col-3'> <button type='submit' className='form-control bg-success' onClick={this.saveEmployee} > Save</button></div>
+                     <div className='col-3'> <button type='submit' className='form-control bg-success' > Save</button></div>
                     </div>
                  </div>
                  <div className='card-body'>
@@ -167,16 +168,16 @@ export default class AddEmployee extends React.Component {
                             <label htmlFor="">Employee_Info:</label>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='firstname' placeholder="firstname" onChange={this.handleChange} value={this.state.firstname} />
+                            <input type="text" className='form-control' name='firstname' placeholder="firstname" onChange={this.handleChange} value={this.state.firstname} required/>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='lastname' placeholder="lastname" onChange={this.handleChange} value={this.state.lastname} />
+                            <input type="text" className='form-control' name='lastname' placeholder="lastname" onChange={this.handleChange} value={this.state.lastname} required/>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='phone' placeholder="phone" onChange={this.handleChange} value={this.state.phone} />
+                            <input type="text" className='form-control' name='phone' placeholder="phone" onChange={this.handleChange} value={this.state.phone} required/>
                         </div>
                         <div className='col-4'>
-                            <input type="text" className='form-control' name='email' placeholder="email" onChange={this.handleChange} value={this.state.email} />
+                            <input type="text" className='form-control' name='email' placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
                         </div>
                      </div>
                      <div className='row'>
@@ -187,16 +188,16 @@ export default class AddEmployee extends React.Component {
                             <input type="text" className='form-control' name='ssn' placeholder="ss number" onChange={this.handleChange} value={this.state.ssn} />
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='dob' placeholder="date of birth" onChange={this.handleChange} value={this.state.dob} />
+                            <input type="text" className='form-control' name='dob' placeholder="date of birth" onChange={this.handleChange} value={this.state.dob} required/>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='username' placeholder="username" onChange={this.handleChange} value={this.state.username} />
+                            <input type="text" className='form-control' name='username' placeholder="username" onChange={this.handleChange} value={this.state.username} required/>
                         </div>
                         <div className='col-3'>
-                            <input type="password" className='form-control' name='password' placeholder="temporal password" onChange={this.handleChange} value={this.state.password} />
+                            <input type="password" className='form-control' name='password' placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
                          </div>
                          <div className='col-1'>
-                            <input type="text" className='form-control' name='role' placeholder="Role" onChange={this.handleChange} value={this.state.role} />
+                            <input type="text" className='form-control' name='role' placeholder="Role" onChange={this.handleChange} value={this.state.role} required/>
                         </div>
                      </div>
                      <div className='row'>
@@ -204,13 +205,13 @@ export default class AddEmployee extends React.Component {
                             <label htmlFor="">Employee_Address:</label>
                         </div>
                         <div className='col-3'>
-                            <input type="text" className='form-control' name='street' placeholder="street" onChange={this.handleChange} value={this.state.street} />
+                            <input type="text" className='form-control' name='street' placeholder="street" onChange={this.handleChange} value={this.state.street} required/>
                         </div>
                         <div className='col-1'>
                             <input type="text" className='form-control' name='suite' placeholder="suite" onChange={this.handleChange} value={this.state.suite} />
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='city' placeholder="city" onChange={this.handleChange} value={this.state.city} />
+                            <input type="text" className='form-control' name='city' placeholder="city" onChange={this.handleChange} value={this.state.city} required/>
                         </div>
                         <div className='col-1'>
                             <input type="text" className='form-control' name='state' placeholder="state" onChange={this.handleChange} value={this.state.state} />
@@ -251,5 +252,6 @@ export default class AddEmployee extends React.Component {
                  </div>
              </div>
          </div>
+         </form>
      }
 }

@@ -19,6 +19,7 @@ import ViewSalesComponent from "../components/ViewSales.component";
 import Navbar from "../components/Navbar.component";
 import AddNote from "../components/AddNote.component";
 import Cookies from 'universal-cookie';
+import ViewCategoriesComponent from "../components/ViewCategories.component";
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ class AdminHomeComponent extends Component {
           <Tab eventKey="category" title="Catgeory">
             <Tabs defaultActiveKey="addCategory" animation="false" className="mb-0">
               <Tab eventKey="addCategory" title="Add Category"> <AddCategory /> </Tab>
-              <Tab eventKey="viewCategories" title="View Categories"> {/* add orders content here */}</Tab>
+              <Tab eventKey="viewCategories" title="View Categories"> <ViewCategoriesComponent/></Tab>
             </Tabs>
           </Tab>
           <Tab eventKey="item" title="Item">
