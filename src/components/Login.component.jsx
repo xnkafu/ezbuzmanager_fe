@@ -33,7 +33,7 @@ import {url} from '../config/url.js';
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
-            'ngrok-skip-browser-warning': ''
+            'ngrok-skip-browser-warning': '*'
           },
           body: JSON.stringify({
             username: this.state.username,
