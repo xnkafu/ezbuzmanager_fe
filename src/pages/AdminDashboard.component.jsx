@@ -20,6 +20,8 @@ import Navbar from "../components/Navbar.component";
 import AddNote from "../components/AddNote.component";
 import Cookies from 'universal-cookie';
 import ViewCategoriesComponent from "../components/ViewCategories.component";
+import ViewItemsComponent from "../components/ViewItems.component";
+import AddShipmentDate from "../components/AddShipmentDate.component";
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -95,9 +97,9 @@ class AdminHomeComponent extends Component {
           <Tab eventKey="item" title="Item">
             <Tabs defaultActiveKey="addItem" animation="false" className="mb-0">
                 <Tab eventKey="addItem" title="Register Item"> <AddItem /></Tab>
-                <Tab eventKey="viewItems" title="View Registered Items"> {/* add orders content here */}</Tab>
+                <Tab eventKey="viewItems" title="View Registered Items"> <ViewItemsComponent /></Tab>
                 <Tab eventKey="addItemToInventory" title="Add Item to Inventory"> <AddItemDetails /> </Tab> 
-                <Tab eventKey="addShipmentDate" title="Add Shipment Date">  </Tab> 
+                <Tab eventKey="addShipmentDate" title="Add Shipment Date"> <AddShipmentDate/> </Tab> 
             </Tabs>
           </Tab>
           <Tab eventKey="Sale" title="Sale">

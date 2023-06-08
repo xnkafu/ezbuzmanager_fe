@@ -5,11 +5,11 @@ import { ListGroup } from 'react-bootstrap';
 import {url} from '../config/url.js';
 import {Modal,Button} from 'react-bootstrap'
 
-class ViewCategoriesComponent extends React.Component {
+class ViewItemsComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [], // An empty array to hold the sales data
+      items: [], // An empty array to hold the sales data
       currentPage: 1, // The current page number
       itemsPerPage: 20 // The number of items to show per page
     };
@@ -20,17 +20,17 @@ class ViewCategoriesComponent extends React.Component {
     // Here you can fetch the sales data from an API or a database
     // and update the state with the fetched data
     // For this example, we will just populate the state with 10 items
-    this.getCategories()
+    this.getItems()
         
      
   }
 
   // Get the current page of sales
   getCurrentCategories() {
-    const { categories, currentPage, itemsPerPage } = this.state;
+    const { items, currentPage, itemsPerPage } = this.state;
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    return categories.slice(indexOfFirstItem, indexOfLastItem);
+    return items.slice(indexOfFirstItem, indexOfLastItem);
   }
 
   // Change the page
@@ -38,9 +38,9 @@ class ViewCategoriesComponent extends React.Component {
     this.setState({ currentPage: pageNumber });
   }
 
-  getCategories =()=>{
+  getItems =()=>{
     axios({
-      url: url+"/v1/api/category/categories",
+      url: url+"/v1/api/item/items",
       method: "GET",
       headers: {
         //  authorization: "",
@@ -49,7 +49,7 @@ class ViewCategoriesComponent extends React.Component {
       },
       })
        .then(response => {
-           this.setState({ categories: response.data })
+           this.setState({ items: response.data })
            console.log(response.data)
       })
       .catch(err => { 
@@ -63,8 +63,8 @@ class ViewCategoriesComponent extends React.Component {
     const currentCategories = this.getCurrentCategories();
 
     // Calculate the total number of pages
-    const { categories, itemsPerPage } = this.state;
-    const totalPages = Math.ceil(categories.length / itemsPerPage);
+    const { items, itemsPerPage } = this.state;
+    const totalPages = Math.ceil(items.length / itemsPerPage);
 
     // Generate the page numbers
     const pageNumbers = [];
@@ -77,8 +77,8 @@ class ViewCategoriesComponent extends React.Component {
         <div className="card">
             <div className='card-header bg-info'>
               <div className='row'>
-                <div className='col-3'><h2>List of Saved Categories</h2></div>
-                <div className='col-3'><Button className='form-control  bg-primary rounded-circle' onClick={this.getCategories}>Refresh List</Button></div>
+                <div className='col-3'><h2>List of Saved Items</h2></div>
+                <div className='col-3'><Button className='form-control  bg-primary rounded-circle' onClick={this.getItems}>Refresh List</Button></div>
               </div>
             </div>
             <div id='printDiv'></div>
@@ -87,16 +87,26 @@ class ViewCategoriesComponent extends React.Component {
           <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Item Name</th>
+                        <th>Model</th>
                         <th>Description</th>
+                        <th>Release Year</th>
+                        <th>Selling Price</th>
+                        <th>Purchase Price</th>
             </tr>
           </thead>
           <tbody>
-            {currentCategories.map((category,index) => (
-                <tr key={category.id}>
+            {currentCategories.map((item,index) => (
+                <tr key={item.id}>
                     <td>{index+1}</td>
-                    <td>{category.name}</td>
-                    <td>{category.description}</td>
+                    <td>{item.category.name}</td>
+                    <td>{item.name}</td>
+                    <td>{item.model}</td>
+                    <td>{item.description}</td>
+                    <td>{item.releaseYear}</td>
+                    <td>{item.sellingPrice}</td>
+                    <td>{item.purchasePrice}</td>
               </tr>
             ))}
           </tbody>
@@ -141,7 +151,7 @@ class ViewCategoriesComponent extends React.Component {
   }
 }
 
-export default ViewCategoriesComponent;
+export default ViewItemsComponent;
 
 
 //export default withRouter(ViewSalesComponent)

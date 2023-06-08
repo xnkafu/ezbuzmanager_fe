@@ -27,7 +27,7 @@ export default class AddCategory extends React.Component {
      }
 
      saveCategory = (event) =>{
-        event.preventDefault();
+       // event.preventDefault();
         console.log('inside')
         axios({
             url: url+"/v1/api/category/createCategory",
@@ -61,7 +61,7 @@ export default class AddCategory extends React.Component {
 
      render() {
          return <form onSubmit={this.saveCategory}>
-         <div className='container'>
+         <div >
              <div className='card'>
                  <div className='card-header bg-info'>
                     <h4>Add Category</h4>
@@ -93,7 +93,7 @@ export default class AddCategory extends React.Component {
                  <div className='card-footer'>
                     <div className='row'>
                         <div className='col-3'></div>
-                        <div className='col-3'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
+                        <div className='col-3'> <button type='button' className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
                         <div className='col-3'> <button type='submit' className='form-control bg-success' > Save</button></div>
                     </div>
                  </div>

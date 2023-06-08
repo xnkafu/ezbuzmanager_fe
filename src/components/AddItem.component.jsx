@@ -74,7 +74,7 @@ export default class AddItem extends React.Component {
      }
 
      clearForm() {
-        this.setState({name: "", description:"", category:"",make:"",model:"",releaseYear:0,purchasePrice:0,sellingPrice:0})
+        this.setState({name: "", description:"", category:"",make:"",model:"",releaseYear:'',purchasePrice:'',sellingPrice:''})
     }
 
     populateOptions =  () => {
@@ -105,7 +105,7 @@ export default class AddItem extends React.Component {
       }
 
      render() {
-         return <div className='container'>
+         return <form onSubmit={this.saveItem}>
              <div className='card'>
                  <div className='card-header bg-info'>
                     <h4>Register Item Type</h4>
@@ -116,7 +116,7 @@ export default class AddItem extends React.Component {
                                 <label htmlFor=""> Category:</label>
                             </div>
                             <div className='col-7'>
-                            <select name="category" className='form-control' onChange={this.handleChange} value={this.state.category}>
+                            <select name="category" className='form-control' onChange={this.handleChange} value={this.state.category} required>
                                 {this.populateOptions()}
                             </select>
                              </div>
@@ -137,21 +137,22 @@ export default class AddItem extends React.Component {
                     </div>
                     <div className='row'>
                         <div className='col-3'>
-                            <label htmlFor=""> Description:</label>
-                        </div>
-                        <div className='col-7'>
-                            <input type="text" className='form-control' name='description' onChange={this.handleChange} value={this.state.description} />
-                        </div>
-                    </div>
-                    
-                    <div className='row'>
-                        <div className='col-3'>
                             <label htmlFor=""> Model:</label>
                         </div>
                         <div className='col-7'>
-                            <input type="text" className='form-control' name='model' onChange={this.handleChange} value={this.state.model} />
+                            <input type="text" className='form-control' name='model' onChange={this.handleChange} value={this.state.model} required/>
                         </div>
                     </div>
+                    <div className='row'>
+                        <div className='col-3'>
+                            <label htmlFor=""> Description:</label>
+                        </div>
+                        <div className='col-7'>
+                            <input type="text" className='form-control' name='description' onChange={this.handleChange} value={this.state.description} required/>
+                        </div>
+                    </div>
+                    
+                    
                     <div className='row'>
                         <div className='col-3'>
                             <label htmlFor=""> Release Year:</label>
@@ -165,7 +166,7 @@ export default class AddItem extends React.Component {
                             <label htmlFor=""> Purchase Price:</label>
                         </div>
                         <div className='col-7'>
-                            <input type="number" className='form-control' name='purchasePrice' onChange={this.handleChange} value={this.state.purchasePrice} />
+                            <input type="number" className='form-control' name='purchasePrice' onChange={this.handleChange} value={this.state.purchasePrice} required/>
                         </div>
                     </div>
                     <div className='row'>
@@ -173,18 +174,19 @@ export default class AddItem extends React.Component {
                             <label htmlFor=""> Selling Price:</label>
                         </div>
                         <div className='col-7'>
-                            <input type="number" className='form-control' name='sellingPrice' onChange={this.handleChange} value={this.state.sellingPrice} />
+                            <input type="number" className='form-control' name='sellingPrice' onChange={this.handleChange} value={this.state.sellingPrice} required/>
                         </div>
                     </div>
                  </div>
+
                  <div className='card-footer'>
                     <div className='row'>
                         <div className='col-3'></div>
-                        <div className='col-3'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
-                        <div className='col-3'> <button type='submit' className='form-control bg-success' onClick={this.saveItem} > Save</button></div>
+                        <div className='col-3'> <button type='button' className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
+                        <div className='col-3'> <button type='submit' className='form-control bg-success'> Save</button></div>
                     </div>
                  </div>
              </div>
-         </div>
+         </form>
      }
 }

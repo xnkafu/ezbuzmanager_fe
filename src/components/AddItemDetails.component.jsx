@@ -10,7 +10,7 @@ export default class AddItemDetails extends React.Component {
             category: "",
             categoryId: "",
             item: "",
-            quantity: 0,
+            quantity: '',
             error: "",
             serialNumber: "",
             comment: "",
@@ -35,7 +35,9 @@ export default class AddItemDetails extends React.Component {
     }
 
     
-    saveItem = async () => {
+    saveItem = async (event) => {
+        event.preventDefault()
+        
         let categoryTemp = this.state.retrievedCategories.filter((cat, ind) => {
             if (cat.name === this.state.category) {
                 return cat
@@ -100,7 +102,7 @@ export default class AddItemDetails extends React.Component {
     }
   
     clearForm() {
-        this.setState({ name: "", description: "", category: "",quantity:0 })
+        this.setState({ name: "", description: "", category: "",quantity:'' })
     }
 
     populateCategoryOptions = () => {
@@ -114,10 +116,10 @@ export default class AddItemDetails extends React.Component {
         const items = this.state.retrievedItems
         return items.map((item, ind) => {
             if (ind === 0) { 
-                return <option key={ind} >Select Item</option>
+                return <option key={ind} ></option>
             }
             else if (item.category.name === this.state.category) { //revisit
-                return <option key={ind} value={item.name /*+ " " + item.model */}>{item.name + " " + item.model}</option>
+                return <option key={ind} value={item.name /*+ " " + item.model */}>{item.name + " " + item.model + " " + item.description}</option>
             }
         })
     }
@@ -200,6 +202,7 @@ export default class AddItemDetails extends React.Component {
     }
 
     printBarcodes = () => {
+        
         alert('print called')
         var tempBarcodes = this.state.barcodes
         var barcode = tempBarcodes[0].barcode
@@ -220,7 +223,7 @@ export default class AddItemDetails extends React.Component {
         window.print(div_id)
     }
     render() {
-        return <div className='container'>
+        return <form onSubmit={this.saveItem}>
             <div className='row'>
                 <div className='col-6'>
                     <div className='card'>
@@ -229,8 +232,8 @@ export default class AddItemDetails extends React.Component {
                             <div className='col-7'><h4>Add Item/Items to Inventory</h4></div>
                             <div className='col-5'>
                                 <div className='row'>
-                                    <div className='col-6'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
-                                    <div className='col-6'> <button type='submit' className='form-control bg-success' onClick={this.saveItem} > Save</button></div>
+                                    <div className='col-6'> <button type='button' className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
+                                    <div className='col-6'> <button type='submit' className='form-control bg-success'> Save</button></div>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +245,7 @@ export default class AddItemDetails extends React.Component {
                                 <label htmlFor=""> Category:</label>
                             </div>
                             <div className='col-7'>
-                                <select name="category" className='form-control' onChange={this.handleChange} value={this.state.category}>
+                                <select name="category" className='form-control' onChange={this.handleChange} value={this.state.category} required>
                                     {this.populateCategoryOptions()}
                                 </select>
                             </div>
@@ -252,9 +255,9 @@ export default class AddItemDetails extends React.Component {
                                 <label htmlFor=""> Item:</label>
                             </div>
                             <div className='col-7'>
-                                    <select name="item" className='form-control' onChange={this.handleChange} value={this.state.item}>
-                                    {this.populateItemOptions()}
-                                </select>
+                                    <select name="item" className='form-control' onChange={this.handleChange} value={this.state.item} required>
+                                        {this.populateItemOptions()}
+                                    </select>
                             </div>
                         </div>
                         <div className='row'>
@@ -286,7 +289,7 @@ export default class AddItemDetails extends React.Component {
                                 <label htmlFor=""> Shipment Date:</label>
                             </div>
                             <div className='col-7'>
-                                <select name="shipmentDate" className='form-control' onChange={this.handleChange} value={this.state.shipmentDate} >
+                                <select name="shipmentDate" className='form-control' onChange={this.handleChange} value={this.state.shipmentDate} required>
                                     {this.populateShipmentDateOptions()}
                                 </select>
                             </div>
@@ -306,7 +309,7 @@ export default class AddItemDetails extends React.Component {
                                     <h4>Print Generated Barcodes</h4>
                                 </div>
                                 <div className='col-4'>
-                                    <button type='submit' className='form-control bg-success' onClick={this.printBarcodes} > Print Barcodes</button>
+                                    <button type='button' className='form-control bg-success'  onClick={this.printBarcodes} > Print Barcodes</button>
                                 </div>
                             </div>
                         </div>
@@ -329,6 +332,6 @@ export default class AddItemDetails extends React.Component {
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     }
 }
