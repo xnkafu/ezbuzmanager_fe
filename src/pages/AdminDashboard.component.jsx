@@ -17,6 +17,8 @@ import {withRouter,Link} from 'react-router-dom'
 import PerformSaleNoScanner from "../components/PerformSaleNoScanner.component";
 import ViewSalesComponent from "../components/ViewSales.component";
 import Navbar from "../components/Navbar.component";
+import AddNote from "../components/AddNote.component";
+import Cookies from 'universal-cookie';
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -60,6 +62,18 @@ class AdminHomeComponent extends Component {
     
   }
 
+  componentDidMount = ()=>{
+    const cookies = new Cookies();
+    const user = cookies.get('user');
+    console.log(' user is ')
+    console.log(user)
+
+    if (user === null || user == undefined) {
+      const { history } = this.props
+      history.push('/login')
+    }
+
+  }
   
   render() {
      
@@ -96,6 +110,9 @@ class AdminHomeComponent extends Component {
           </Tab>
           <Tab eventKey="employees" title="Employees">
             <AddEmployee />           
+          </Tab>
+          <Tab eventKey="notes" title="Work Notes">
+            <AddNote />     
           </Tab>
         </Tabs>
       </div>

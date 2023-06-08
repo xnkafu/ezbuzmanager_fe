@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter,Link} from 'react-router-dom'
+import Cookies from 'universal-cookie';
+
 
 class Navbar extends Component {
     constructor(props) {
@@ -8,6 +10,9 @@ class Navbar extends Component {
 
     logout = () => {
         const  { history } = this.props
+
+        const cookies = new Cookies();
+        cookies.remove('user');
         //reset local storage
         history.push('/login')
         
@@ -29,12 +34,6 @@ class Navbar extends Component {
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <div className="navbar-nav">
-          <button className="nav-item nav-link btn btn-link">
-              <b>Home</b>
-            </button>
-            <button className="nav-item nav-link btn btn-link">
-              <b>Profile</b>
-            </button>
             <button className="nav-item nav-link btn btn-link" onClick={this.logout}>
               <b>Logout</b>
             </button>

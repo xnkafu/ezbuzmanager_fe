@@ -4,6 +4,7 @@ import axios from 'axios'
 import {withRouter,Link} from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap';
 import {url} from '../config/url.js';
+import Cookies from 'universal-cookie';
 
 
   class LoginComp extends React.Component {
@@ -44,8 +45,12 @@ import {url} from '../config/url.js';
         // If the login was successful, store the token and user info in localStorage
         if (response.ok) {
             const data = await response.json();
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data));
+            const cookies = new Cookies();
+            cookies.set('user', JSON.stringify(data));
+            
+            console.log(cookies.get('user'));
+           // localStorage.setItem('token', data.token);
+           // localStorage.setItem('user', JSON.stringify(data));
           // Reset the form
             this.setState({ username: '', password: '' });
             const { history } = this.props
