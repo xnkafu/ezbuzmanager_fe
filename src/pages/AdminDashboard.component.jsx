@@ -23,6 +23,7 @@ import ViewCategoriesComponent from "../components/ViewCategories.component";
 import ViewItemsComponent from "../components/ViewItems.component";
 import AddShipmentDate from "../components/AddShipmentDate.component";
 import StockTrackerComponent from "../components/StockTracker.component";
+import EmployeeReview from "../components/EmployeeReview.component";
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -113,7 +114,10 @@ class AdminHomeComponent extends Component {
             <AddCustomer />           
           </Tab>
           <Tab eventKey="employees" title="Employees">
-            <AddEmployee />           
+            <Tabs defaultActiveKey="performSale" animation="false" className="mb-0">
+                <Tab eventKey="addEmployee" title="Add Employee"> <AddEmployee /> </Tab>
+                <Tab eventKey="employeeReview" title="Employee Review"> <EmployeeReview /></Tab>
+            </Tabs>           
           </Tab>
           <Tab eventKey="notes" title="Work Notes">
             <AddNote />     

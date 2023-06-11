@@ -35,12 +35,8 @@ export default class AddCustomer extends React.Component {
          })
      }
 
-     saveCustomer = () => {
-         let categoryId = this.state.retrievedCustomers.filter( (item,ind) => {
-             if (item.name === this.state.category) {
-                 return item
-             }
-         })
+     saveCustomer = (event) => {
+        event.preventDefault();
          let payload = {
              id: 0,
              firstname: this.state.firstname,
@@ -70,15 +66,20 @@ export default class AddCustomer extends React.Component {
         })
         .then( response => {
             alert("customer Saved")
+            console.log('response' , response.data)
+            //this.setState({retrievedCustomers: response.data})
             this.clearForm()
+            this.backendCustomers()
         })
         .catch(err => { 
+            event.preventDefault();
+            console.log(err)
             const code = err.response.status
             if (code === 409) {
-                this.setState({error:"Item name already exist. Enter a different name"})
+                this.setState({error:"Customer name already exist with phone number"})
             }
         })
-         this.backendCustomers()
+        
      }
 
      clearForm() {
@@ -128,7 +129,7 @@ export default class AddCustomer extends React.Component {
             },
         })
         .then( response => {
-            this.setState({retrievedCustomers: response.data})          
+            this.setState({retrievedCustomers: response.data.reverse()})          
         })
         .catch(err => { 
             const code = err.response.status
@@ -139,14 +140,14 @@ export default class AddCustomer extends React.Component {
     }
 
      render() {
-         return <div className='container'>
+         return <form onSubmit={this.saveCustomer}>
              <div className='card'>
                  <div className='card-header bg-info'>
                      <div className='row'>
                      <div className='col-3'><h4>Add Customer</h4></div>
                      <div className='col-3'></div>
-                     <div className='col-3'> <button className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
-                     <div className='col-3'> <button type='submit' className='form-control bg-success' onClick={this.saveCustomer} > Save</button></div>
+                     <div className='col-3'> <button type='button' className='form-control bg-danger' onClick={this.clearForm}> Clear</button></div>
+                     <div className='col-3'> <button type='submit' className='form-control bg-success'  > Save</button></div>
                     </div>
                  </div>
                  <div className='card-body'>
@@ -156,13 +157,13 @@ export default class AddCustomer extends React.Component {
                             <label htmlFor="">Customer_Info:</label>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='firstname' placeholder="firstname" onChange={this.handleChange} value={this.state.firstname} />
+                            <input type="text" className='form-control' name='firstname' placeholder="firstname" onChange={this.handleChange} value={this.state.firstname} required/>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='lastname' placeholder="lastname" onChange={this.handleChange} value={this.state.lastname} />
+                            <input type="text" className='form-control' name='lastname' placeholder="lastname" onChange={this.handleChange} value={this.state.lastname} required/>
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='phone' placeholder="phone" onChange={this.handleChange} value={this.state.phone} />
+                            <input type="text" className='form-control' name='phone' placeholder="phone" onChange={this.handleChange} value={this.state.phone} required/>
                         </div>
                         <div className='col-4'>
                             <input type="text" className='form-control' name='email' placeholder="email" onChange={this.handleChange} value={this.state.email} />
@@ -179,7 +180,7 @@ export default class AddCustomer extends React.Component {
                             <input type="text" className='form-control' name='suite' placeholder="suite" onChange={this.handleChange} value={this.state.suite} />
                         </div>
                         <div className='col-2'>
-                            <input type="text" className='form-control' name='city' placeholder="city" onChange={this.handleChange} value={this.state.city} />
+                            <input type="text" className='form-control' name='city' placeholder="city" onChange={this.handleChange} value={this.state.city} required/>
                         </div>
                         <div className='col-1'>
                             <input type="text" className='form-control' name='state' placeholder="state" onChange={this.handleChange} value={this.state.state} />
@@ -217,6 +218,6 @@ export default class AddCustomer extends React.Component {
                      </table>
                  </div>
              </div>
-         </div>
+         </form>
      }
 }
