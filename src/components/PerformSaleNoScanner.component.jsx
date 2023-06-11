@@ -23,7 +23,8 @@ export default class PerformSaleNoScanner extends Component {
       newSellingPrice: 0,
       customerPhoneNumber: "",
       customerSearchError: "",
-      lastSale: {}
+      lastSale: {},
+      retrievedCustomers: []
       
     };
   }
@@ -160,6 +161,7 @@ export default class PerformSaleNoScanner extends Component {
 
   componentDidMount = () => {
     this.getStock()
+    this.backendCustomers()
   }
 
   editPrice = () => {
@@ -206,9 +208,10 @@ export default class PerformSaleNoScanner extends Component {
     }
   }
 
-  findCustomerByPhoneNumber = async () => {
+  findCustomerByPhoneNumber = async (phoneNum) => {
+    
     await axios({
-      url: "http://localhost:8080/v1/api/customer/" + this.state.customerPhoneNumber,                            
+      url: url+"/v1/api/customer/" + this.state.customerPhoneNumber,                            
       method: "GET",                   
       headers: { 
         //authorization: "", 
@@ -234,6 +237,26 @@ export default class PerformSaleNoScanner extends Component {
       })
     
   }
+  backendCustomers = () => {
+    axios({
+        url: url+"/v1/api/customer/customers",
+        method: "GET",
+        headers: {
+            authorization: "",
+            'Access-Control-Allow-Origin': '*',
+            'ngrok-skip-browser-warning': '*'
+        },
+    })
+    .then( response => {
+        this.setState({retrievedCustomers: response.data.reverse()})          
+    })
+    .catch(err => { 
+        const code = err.response.status
+        if (code === 409) {
+            this.setState({error:"Error occurred"})
+        }
+    } )
+}
   showFoundCustomer = () => {
     var foundCustomer = this.state.foundCustomer
    // console.log("customer", this.state.customer)

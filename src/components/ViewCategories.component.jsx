@@ -49,7 +49,7 @@ class ViewCategoriesComponent extends React.Component {
       },
       })
        .then(response => {
-           this.setState({ categories: response.data })
+           this.setState({ categories: response.data.reverse() })
            console.log(response.data)
       })
       .catch(err => { 
