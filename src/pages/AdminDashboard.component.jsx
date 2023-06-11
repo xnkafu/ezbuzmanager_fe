@@ -22,6 +22,7 @@ import Cookies from 'universal-cookie';
 import ViewCategoriesComponent from "../components/ViewCategories.component";
 import ViewItemsComponent from "../components/ViewItems.component";
 import AddShipmentDate from "../components/AddShipmentDate.component";
+import StockTrackerComponent from "../components/StockTracker.component";
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -116,6 +117,12 @@ class AdminHomeComponent extends Component {
           </Tab>
           <Tab eventKey="notes" title="Work Notes">
             <AddNote />     
+          </Tab>
+          <Tab eventKey="accounting" title="Accounting">
+            <Tabs defaultActiveKey="stock" animation="false" className="mb-0">
+                <Tab eventKey="stock" title="Stock Tracker"> <StockTrackerComponent /></Tab>
+                <Tab eventKey="history" title="Stock History"> </Tab>
+            </Tabs>           
           </Tab>
         </Tabs>
       </div>

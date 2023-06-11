@@ -196,7 +196,7 @@ export default class AddNote extends React.Component {
                                  <th> Description</th>
                              </tr>
                          </thead>
-                         <tbody>
+                         <tbody style={{ whiteSpace: 'pre-wrap' }}>
                              {this.showNotes(currentNotes)}
                          </tbody>
                      </table>
