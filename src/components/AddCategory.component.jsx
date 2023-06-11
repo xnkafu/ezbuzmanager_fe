@@ -27,7 +27,7 @@ export default class AddCategory extends React.Component {
      }
 
      saveCategory = (event) =>{
-       // event.preventDefault();
+        event.preventDefault();
         console.log('inside')
         axios({
             url: url+"/v1/api/category/createCategory",

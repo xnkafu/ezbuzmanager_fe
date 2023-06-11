@@ -33,7 +33,8 @@ export default class AddItem extends React.Component {
          })
      }
 
-     saveItem() {
+     saveItem(event) {
+        event.preventDefault();
          let categoryId = this.state.retrievedCategories.filter( (item,ind) => {
              if (item.name === this.state.category) {
                  return item

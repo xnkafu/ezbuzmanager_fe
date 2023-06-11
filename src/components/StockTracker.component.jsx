@@ -14,6 +14,16 @@ class StockTrackerComponent extends React.Component {
     };
   }
 
+  handleChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      ...this.state,
+      [name]: value,
+    });
+    console.log(this.state);
+  };
+
     componentDidMount() {
       
     // Here you can fetch the sales data from an API or a database
@@ -96,7 +106,7 @@ class StockTrackerComponent extends React.Component {
                     <td>{stockItem.initialStock}</td>
                     <td>{stockItem.quantitySold}</td>
                     <td>{stockItem.currentStock}</td>
-                    <td><input type="text" className='form-control' name='actualStock'/></td>
+                    <td><input type="number" className='form-control' name='actualStock'onChange={this.handleChange}/></td>
 
               </tr>
             ))}
