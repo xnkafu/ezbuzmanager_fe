@@ -44,6 +44,7 @@ export default class AddCategory extends React.Component {
         })
         .then( response => {
             alert("Category Saved")
+            console.log('response', response)
             this.setState({error:""})
             this.clearForm()
         })
