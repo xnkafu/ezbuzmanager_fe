@@ -312,13 +312,13 @@ export default class PerformSaleNoScanner extends Component {
 
   saveSale = () => {
     const d = new Date();
-    var date = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDay()
+    //var date = d.getFullYear() + "/" + d.getMonth() + "/" + d.getDay()
     var cartTemp = this.state.cart
     var payload = {
       cart: cartTemp,
       employee: {id:1},
       customer: this.state.customer,
-      salesDate: date,
+      salesDate: d,
       total: this.state.cartTotal
     }
     console.log(payload)
