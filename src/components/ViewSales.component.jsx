@@ -10,7 +10,7 @@ class ViewSalesComponent extends React.Component {
     this.state = {
       sales: [], // An empty array to hold the sales data
       currentPage: 1, // The current page number
-      itemsPerPage: 5 // The number of items to show per page
+      itemsPerPage: 20 // The number of items to show per page
     };
   }
 
