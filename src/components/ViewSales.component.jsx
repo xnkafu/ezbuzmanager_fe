@@ -30,7 +30,7 @@ class ViewSalesComponent extends React.Component {
          },
          })
           .then(response => {
-              this.setState({ sales: response.data })
+              this.setState({ sales: response.data.reverse() })
               console.log(response.data)
          })
          .catch(err => { 
