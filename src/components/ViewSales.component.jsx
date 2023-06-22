@@ -130,11 +130,11 @@ class ViewSalesComponent extends React.Component {
                     <tr>
                         <th>#</th>
                         <th>ConfirmationCode</th>
+                        <th>Sold Date</th>
+                        <th>Sold By</th>
                         <th>Item</th>
                         <th>Total</th>
                         <th>Customer</th>
-                        <th>Sold By</th>
-                        <th>Sold Date</th>
                         <th>Action</th>
             </tr>
           </thead>
@@ -143,11 +143,11 @@ class ViewSalesComponent extends React.Component {
                 <tr key={sale.id}>
                     <td>{index+1}</td>
                     <td>{sale.confirmationCode}</td>
+                    <td>{ (new Date(sale.salesDate)).toLocaleString('en-US', { timeZone: "Africa/Douala" })}</td>
+                    <td>{sale.employee.firstname}</td>
                     <td>{sale.itemsSold}</td>
                     <td>{sale.total}</td>
                     <td>{sale.customer.firstname + " " + sale.customer.lastname}</td>
-                    <td>{sale.employee.firstname}</td>
-                    <td>{sale.salesDate}</td>
                     <td><button className='form-control bg-success' onClick={()=>this.printreciept(sale)}>print</button></td>
 
               </tr>
