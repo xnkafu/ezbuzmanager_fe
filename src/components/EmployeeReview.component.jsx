@@ -14,7 +14,7 @@ export default class EmployeeReview extends React.Component {
             retrievedReviews: [],
             search:'',
             reviewType:'',
-            employeeToReview: {},
+            employeeToReview: '',
             currentPage: 1, // The current page number
             itemsPerPage: 5 // The number of items to show per page
          }
@@ -47,13 +47,13 @@ export default class EmployeeReview extends React.Component {
         const cookies = new Cookies();
         const user = cookies.get('user');
         const d = new Date();
-
+        
          let payload = {
              description: this.state.description,
-             employee: this.state.employeeToReview,
+             employeeId: this.state.employeeToReview,
              date: d,
              reviewType: this.state.reviewType,
-             reviewer: user
+             reporter: user
             
         }
         console.log("payload is ")
@@ -72,6 +72,7 @@ export default class EmployeeReview extends React.Component {
             //this.setState({rev})
             alert("Employee Review Saved")
             this.clearForm()
+            this.backendReviews()
         })
         .catch(err => { 
             const code = err.response.status
@@ -86,29 +87,31 @@ export default class EmployeeReview extends React.Component {
         this.setState({description: ""})
     }
 
-    showReviews = (notes) => {
+    showReviews = (reviews) => {
         var searchTemp = this.state.search
        // var notes = this.state.retrievedNotes
         if (this.state.search === "") {
-            return notes.map((note, ind) => {
-                var d = new Date(note.date)
+            return reviews.map((review, ind) => {
+                var d = new Date(review.date)
                 return <tr key={ind}>
                     <td >{ind+1}</td>
                     <td>{d.toLocaleString('en-US', { timeZone: "Africa/Douala" })} </td>
-                    <td>{note.employee.lastname + " " + note.employee.firstname}</td>
-                    <td>{note.description}</td>
+                    <td>{review.employee.lastname + " " + review.employee.firstname}</td>
+                    <td>{review.reviewType}</td>
+                    <td>{review.description}</td>
+                    <td>{review.reporter.lastname + " " +review.reporter.firstname}</td>
                 </tr>
             })
         } else {
-            return notes.map((note, ind) => {
-                var d = new Date(note.date)
-                if (note.employee.lastname.toUpperCase().includes(searchTemp.toUpperCase()) || note.employee.firstname.toUpperCase().includes(searchTemp.toUpperCase())) {
-                    var d = new Date(note.date)
+            return reviews.map((review, ind) => {
+                var d = new Date(review.date)
+                if (review.employee.lastname.toUpperCase().includes(searchTemp.toUpperCase()) || review.employee.firstname.toUpperCase().includes(searchTemp.toUpperCase())) {
+                    var d = new Date(review.date)
                     return <tr key={ind}>
                         <td >{ind+1}</td>
                         <td>{d.toLocaleString('en-US', { timeZone: "Africa/Douala" })} </td>
-                        <td>{note.employee.lastname + " " + note.employee.firstname}</td>
-                        <td>{note.description}</td>
+                        <td>{review.employee.lastname + " " + review.employee.firstname}</td>
+                        <td>{review.description}</td>
                 </tr>
                 }
                 
@@ -153,7 +156,7 @@ export default class EmployeeReview extends React.Component {
             },
         })
         .then( response => {
-            this.setState({retrievedNotes: response.data.reverse()})          
+            this.setState({retrievedReviews: response.data.reverse()})          
         })
         .catch(err => { 
             const code = err.response.status
@@ -166,7 +169,8 @@ export default class EmployeeReview extends React.Component {
     populateOptions =  () => {
         const employees = this.state.retrievedEmployees
         return employees.map((employee,ind) => {
-            return <option key={ind} value={employee}>{employee.lastname + " " + employee.firstname}</option>
+           // console.log(employee)
+            return <option key={ind} value={employee.id}>{employee.lastname + " " + employee.firstname}</option>
         })
    }
 
@@ -201,8 +205,8 @@ export default class EmployeeReview extends React.Component {
                                 <label htmlFor=""> Employee:</label>
                             </div>
                             <div className='col-5'>
-                                <select name="employeeToReview" className='form-control' onChange={this.handleChange} value={this.state.employeeToReview} required>
-                                    <option value=''></option>
+                                <select name="employeeToReview" className='form-control' onChange={this.handleChange} required>
+                                    
                                     {this.populateOptions()}
                                 </select>
                              </div>
@@ -210,7 +214,7 @@ export default class EmployeeReview extends React.Component {
                                 <label htmlFor=""> Review Type:</label>
                             </div>
                             <div className='col-3'>
-                                <select name="category" className='form-control' onChange={this.handleChange} value={this.state.emploee} required>
+                                <select name="reviewType" className='form-control' onChange={this.handleChange}  required>
                                      <option value=''></option>
                                      <option value='Positive'>Positive</option>
                                      <option value='Negative'>Negative</option>
