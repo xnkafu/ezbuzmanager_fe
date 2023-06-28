@@ -9,11 +9,11 @@ export default class EmployeeReview extends React.Component {
         super(props) 
         this.state = {
             description: "",
-            employee: {},
             date: "",
             retrievedEmployees: [],
             retrievedReviews: [],
             search:'',
+            reviewType:'',
             employeeToReview: {},
             currentPage: 1, // The current page number
             itemsPerPage: 5 // The number of items to show per page
@@ -50,14 +50,16 @@ export default class EmployeeReview extends React.Component {
 
          let payload = {
              description: this.state.description,
-             employee: user,
-             date: d
+             employee: this.state.employeeToReview,
+             date: d,
+             reviewType: this.state.reviewType,
+             reviewer: user
             
         }
         console.log("payload is ")
         console.log(payload)
         await axios({
-            url: url+"/v1/api/note/createNote",
+            url: url+"/v1/api/employeeReview/createReview",
             method: "POST",
             headers: {
               //  authorization: "",
@@ -67,6 +69,7 @@ export default class EmployeeReview extends React.Component {
             data: payload,
         })
         .then( response => {
+            //this.setState({rev})
             alert("Employee Review Saved")
             this.clearForm()
         })
@@ -141,7 +144,7 @@ export default class EmployeeReview extends React.Component {
     
     backendReviews = () => {
         axios({
-            url: url+"/v1/api/note/notes",
+            url: url+"/v1/api/employeeReview/reviews",
             method: "GET",
             headers: {
                 authorization: "",
