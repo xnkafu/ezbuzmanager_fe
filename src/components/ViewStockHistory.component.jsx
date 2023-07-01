@@ -9,6 +9,7 @@ class ViewStockHistoryComponent extends React.Component {
     super(props);
     this.state = {
       id: 0,
+      date: '',
       stockHistoryById: [],
       stockHistories: [], // An empty array to hold the sales data
       stockHistoryDates: [],
@@ -41,8 +42,9 @@ class ViewStockHistoryComponent extends React.Component {
      })
   }
   
-  getStockForId =  (id) => {
-   // var id = this.state.id
+  getStockForId =  (sDate) => {
+    var id = sDate.id
+    this.setState({ date: sDate.date })
        axios({
                               url: url+"/v1/api/stockHistory/"+id,
                               method: "GET",
@@ -85,16 +87,10 @@ class ViewStockHistoryComponent extends React.Component {
     
     return this.state.stockHistoryDates.map((sDate,ind)=>{
      // console.log(sDate)
-      return <button key={ind} onClick={()=>this.getStockForId(sDate.id)} className='bg-info'>{sDate.date}</button>
+      return <button key={ind} onClick={()=>this.getStockForId(sDate)} className='bg-info'>{sDate.date}</button>
     })
   }
 
-  showHeader = ()=>{
-    var header = this.state.stockHistoryById.date
-    if (header != undefined) {
-      return {header}
-    }
-  }
 
   render() {
     
@@ -111,8 +107,8 @@ class ViewStockHistoryComponent extends React.Component {
           <div className='col-9'>
             <div className="card"> 
                 <div className='card-body'>
-                  <p>{this.showHeader()}</p>
-                  <table className='table'>
+                  <h4 className='bg-success'>Stock for: {this.state.date}</h4>
+                  <table className='table table-bordered'>
                       <thead className='thead-dark'>
                         <tr>
                           <th>#</th>
