@@ -180,7 +180,7 @@ export default class AddItemDetails extends React.Component {
             })
                 .then(response => {
                     this.setState({ retrievedShipmentDates: ['',...response.data] })
-                    console.log(response.data)
+                   // console.log(response.data)
                 })
                 .catch(err => {
                     const code = err.response.status
