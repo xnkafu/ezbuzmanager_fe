@@ -56,7 +56,7 @@ class ViewStockHistoryComponent extends React.Component {
                               
                               })
                               .then(response => {
-                                  this.setState({ stockHistoryById: response.data.reverse() })
+                                  this.setState({ stockHistoryById: response.data })
                                   console.log(response.data)
                                   
                               })
@@ -108,7 +108,7 @@ class ViewStockHistoryComponent extends React.Component {
             <div className="card"> 
                 <div className='card-body'>
                   <h4 className='bg-success'>Stock for: {this.state.date}</h4>
-                  <table className='table table-bordered'>
+                  <table className='table table-bordered table-hover'>
                       <thead className='thead-dark'>
                         <tr>
                           <th>#</th>

@@ -25,6 +25,7 @@ import AddShipmentDate from "../components/AddShipmentDate.component";
 import EmployeeReview from "../components/EmployeeReview.component";
 import TakeStockComponent from "../components/TakeStock.component";
 import ViewStockHistoryComponent from "../components/ViewStockHistory.component";
+import StoreTransactionsComponent from "../components/Transactions.component";
 
 class AdminHomeComponent extends Component {
   constructor(props) {
@@ -127,6 +128,7 @@ class AdminHomeComponent extends Component {
             <Tabs defaultActiveKey="stock" animation="false" className="mb-0">
                 <Tab eventKey="stock" title="Take Stock"> <TakeStockComponent /></Tab>
                 <Tab eventKey="history" title="Stock History"><ViewStockHistoryComponent /> </Tab>
+                <Tab eventKey="transactions" title="Store Transactions"><StoreTransactionsComponent /> </Tab>
             </Tabs>           
           </Tab>
         </Tabs>
