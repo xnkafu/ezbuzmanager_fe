@@ -71,7 +71,7 @@ class TakeStockComponent extends React.Component {
       .then(response => {
         //var resetStock = this.getBackendStock()
          //     this.setState({ stock: resetStock, filledStock: resetStock })
-              console.log('stockHis', response.data)
+             // console.log('stockHis', response.data)
       })
          .catch(err => { 
              //const code = err.response.status
