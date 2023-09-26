@@ -1,3 +1,3 @@
-export let url = 'https://f3cd-2601-43-8201-4e30-fc5e-21b6-9a9c-94c8.ngrok-free.app'
+export let url = 'https://9dd8-68-82-250-210.ngrok-free.app'
 
 //export let url = 'https://10.0.0.175:8080'
